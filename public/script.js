@@ -57,9 +57,33 @@ const connectToNewUser = (userId, stream) =>{
 
 
 const addVideoStream = (video,stream) => {
-    video.srcObject = stream
-    video.addEventListener('loadedmetadata',() =>{
+    
+    if(!video.srcObject){
+        video.srcObject = stream
+        console.log(video.srcObject.active);
+    
+        video.addEventListener('loadedmetadata',() =>{
         video.play()
     })
     videoGrid.append(video)
+    }
+    else{
+        video.srcObject = false
+        console.log(video.srcObject);
+    
+        video.addEventListener('loadedmetadata',() =>{
+        video.play()
+    })
+    videoGrid.append(video)
+    }
+    }
+
+const changeCam = () =>{
+    if(myVideo.style.display ==="none"){
+    myVideo.style.display ="block"
+    }
+    else {
+        myVideo.style.display ="none"
+    }
 }
+    
